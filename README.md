@@ -54,8 +54,10 @@ to keep track of remaining work on a small project.
 Inbox had a widget to create a Reminder. Similarly, I use a widget to send email, with my address preconfigured as the recipient.
 
 One-time setup:
-1. One-time setup: Install [Email Yourself Android app](https://play.google.com/store/apps/details?id=com.dzogchenltd.emailyourself). I use this many times a day; it's well worth the $5 to me.
-1. Install widget and configure your email as the `To email`.
+1. One-time setup: Install [Email Yourself Android app](https://play.google.com/store/apps/details?id=com.dzogchenltd.emailyourself). I use this many times a day; it's well worth the $5 to me. Grant both requested permissions.
+1. Create the widget.
+  - In App drop-down menu, select Gmail app. This way, you'll be able to do `Scheduled Send` in addition to regular `Send`, for reminders that you want to appear later.
+  - Put your email in the To field.
 
 Create a reminder:
 1. Tap widget icon
