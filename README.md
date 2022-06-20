@@ -98,23 +98,21 @@ clutter the calendar of your primary account.
 1. Go to Calendar settings for the secondary account. For `Event notifications`, set default to `Email 1 minutes`. For `All-day event notifications`, set default to `Email 0 days before at 6:00am`.
 1. Go to script.google.com and create a new script with:
     ```
-    function forwardCalendarEvents() {
-      var threads = GmailApp.getInboxThreads();
-      for (var i = 0; i < threads.length; i++) {
-        var message = threads[i].getMessages()[0];
-        if (message.getFrom().indexOf("calendar-notification@google.com") != -1) {
-          // For events with long names, Calendar truncates event name in email subject (with "...")
-          // So grab event name from email body
-          var body = message.getBody();
-          var begin = body.indexOf('<span itemprop="name">') + '<span itemprop="name">'.length;
-          var end = body.indexOf('</span></h3>');
-          var eventName = body.substring(begin, end);
-          GmailApp.sendEmail('MYEMAIL', eventName, /* body */ '', {name: 'Reminder'});
-          threads[i].moveToArchive();
-        }
-      }
+function forwardCalendarEvents() {
+  var threads = GmailApp.getInboxThreads();
+  for (var i = 0; i < threads.length; i++) {
+    var message = threads[i].getMessages()[0];
+    if (message.getFrom().indexOf("calendar-notification@google.com") != -1) {
+      // For events with long names, Calendar truncates event name in email subject (with "...")
+      // So grab event name from email body
+      var plainBody = message.getPlainBody();
+      // Event name is 3rd line
+      var eventName = plainBody.split('\n')[2];
+      GmailApp.sendEmail(MY_EMAIL, eventName, /* body */ '', {name: 'Reminder'});
+      threads[i].moveToArchive();
     }
-    ```
+  }
+}    ```
     Replace `MYEMAIL` with your primary email address.
 1. `Edit` menu -> `Current project's triggers` -> `Add Trigger`. Create a time-based trigger that runs every hour.
 1. For each repeating reminder, create a repeating calendar event for your secondary account.
