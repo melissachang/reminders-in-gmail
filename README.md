@@ -136,9 +136,7 @@ picture to [Inbox Reminder icon](https://miro.medium.com/max/64/1*iiTH-aEmmXAi9b
 
 # Have bundles show up in Inbox daily
 
-This isn't related to reminders, but was another useful Inbox feature.
-
-Say I have a label called `My awesome label`. I only want emails with `My awesome label` to appear in my Inbox every morning.
+This was another useful Inbox feature. Say I have a label called `My awesome label`. I only want emails with `My awesome label` to appear in my Inbox every morning.
 
 ## Step 1: Automatically move `My awesome label` emails out of Inbox (but keep them unread)
 
