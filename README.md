@@ -1,5 +1,14 @@
 # How to get Reminders in Gmail, like Inbox had
 
+  * [How to consume reminders](#how-to-consume-reminders)
+  * [How to create reminders](#how-to-create-reminders)
+    + [Summary](#summary)
+    + [Desktop](#desktop)
+      - [Create an editable reminder](#create-an-editable-reminder)
+    + [Android](#android)
+    + [Repeating reminders](#repeating-reminders)
+  * [Have bundles show up in Inbox daily](#have-bundles-show-up-in-inbox-daily)
+
 I was an avid user of Reminders in Inbox. Since Inbox was deprecated, I've come up with a system that's almost as good.
 
 Basically Reminders are emails. See example screenshots:
@@ -10,16 +19,16 @@ Basically Reminders are emails. See example screenshots:
   <img src="https://user-images.githubusercontent.com/10929390/63665526-8e616680-c780-11e9-9f9f-be9e7592b4cb.png" width="300">
 </p>
 
-## How to consume reminders
+# How to consume reminders
 
 Reminders are just emails, so you can snooze/archive like normal.
 
 If you want a minimal Inbox-like UI, use the [Simplify extension](https://chrome.google.com/webstore/detail/simplify-gmail/pbmlfaiicoikhdbjagjbglnbfcbcojpj?hl=en).
 I recommend using this extension with Gmail's Soft Gray theme, [as JR recommends](https://www.computerworld.com/article/3387139/gmail-redesigned.html).
 
-## How to create reminders
+# How to create reminders
 
-### Summary
+## Summary
 
 | | | Extra work compared to Inbox |
 | --- | --- | --- | 
@@ -27,7 +36,7 @@ I recommend using this extension with Gmail's Soft Gray theme, [as JR recommends
 | One-time reminder on Android | [Email Yourself widget](https://play.google.com/store/apps/details?id=com.dzogchenltd.emailyourself) | 1 tap |
 | Repeating reminder | Repeating calendar event | None |
 
-### Desktop
+## Desktop
 
 1. Press `c` to compose an email
 1. Type the first letter of your email. Press `Enter` to select your email from the auto-complete drop-down. Press `tab`
@@ -40,7 +49,7 @@ feature. Click the arrow next to `Send button`.
 - 3 keystrokes from Step 2)
 - 2 keystrokes from Step 4) (`tab tab`)
 
-#### Create an editable reminder
+### Create an editable reminder
 
 Occasionally I'll want an editable reminder. For example, I may use a reminder
 to keep track of remaining work on a small project.
@@ -49,7 +58,7 @@ to keep track of remaining work on a small project.
 - Find the email in the Drafts folder and move to Inbox
 - Now you can edit reminder
 
-### Android
+## Android
 
 Inbox had a widget to create a Reminder. Similarly, I use a widget to send email, with my address preconfigured as the recipient.
 
@@ -70,7 +79,7 @@ Create a reminder:
 *Extra work compared to Inbox*
 Step 2), which is one tap. (Unfortunately [this step is required](https://jeffangelini.com/EmailYourself/faq/).)
 
-### Repeating reminders
+## Repeating reminders
 
 Inbox had repeating Reminders. With Gmail, emails can't snoozed repeatedly. So instead, I create repeating
 calendar events. I get an email notification for each event.
@@ -121,3 +130,29 @@ clutter the calendar of your primary account.
 picture to [Inbox Reminder icon](https://miro.medium.com/max/64/1*iiTH-aEmmXAi9bmv-H9JPA.png) (courtesy of [here](https://medium.com/@adrienjoly/how-to-add-reminders-to-gmail-like-in-google-inbox-f81fb5ef9ab5)).
 
 *Extra work compared to Inbox:* None
+
+# Have bundles show up in Inbox daily
+
+This isn't related to reminders, but was another useful Inbox feature.
+
+Navigate to https://script.google.com/ and create a script with:
+
+```
+function myFunction() {
+GmailApp.getUserLabelByName('My label 1').getThreads(0, 42).forEach(thread => {
+  if (thread.isUnread()) {
+    thread.moveToInbox();
+  }
+});
+
+GmailApp.getUserLabelByName('My label 2').getThreads(0, 42).forEach(thread => {
+  if (thread.isUnread()) {
+    thread.moveToInbox();
+  }
+});
+}
+```
+Create the following trigger:
+
+![image](https://user-images.githubusercontent.com/10929390/223185207-aed3d32a-34b8-43e3-86c8-f0e09bb40d04.png)
+
