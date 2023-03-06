@@ -1,5 +1,4 @@
-# How to get Reminders in Gmail, like Inbox had
-
+- [How to get Reminders in Gmail, like Inbox had](#how-to-get-reminders-in-gmail-like-inbox-had)
   * [How to consume reminders](#how-to-consume-reminders)
   * [How to create reminders](#how-to-create-reminders)
     + [Summary](#summary)
@@ -7,7 +6,11 @@
       - [Create an editable reminder](#create-an-editable-reminder)
     + [Android](#android)
     + [Repeating reminders](#repeating-reminders)
-  * [Have bundles show up in Inbox daily](#have-bundles-show-up-in-inbox-daily)
+- [Have bundles show up in Inbox daily](#have-bundles-show-up-in-inbox-daily)
+  
+  
+
+# How to get Reminders in Gmail, like Inbox had
 
 I was an avid user of Reminders in Inbox. Since Inbox was deprecated, I've come up with a system that's almost as good.
 
@@ -19,16 +22,16 @@ Basically Reminders are emails. See example screenshots:
   <img src="https://user-images.githubusercontent.com/10929390/63665526-8e616680-c780-11e9-9f9f-be9e7592b4cb.png" width="300">
 </p>
 
-# How to consume reminders
+## How to consume reminders
 
 Reminders are just emails, so you can snooze/archive like normal.
 
 If you want a minimal Inbox-like UI, use the [Simplify extension](https://chrome.google.com/webstore/detail/simplify-gmail/pbmlfaiicoikhdbjagjbglnbfcbcojpj?hl=en).
 I recommend using this extension with Gmail's Soft Gray theme, [as JR recommends](https://www.computerworld.com/article/3387139/gmail-redesigned.html).
 
-# How to create reminders
+## How to create reminders
 
-## Summary
+### Summary
 
 | | | Extra work compared to Inbox |
 | --- | --- | --- | 
@@ -36,7 +39,7 @@ I recommend using this extension with Gmail's Soft Gray theme, [as JR recommends
 | One-time reminder on Android | [Email Yourself widget](https://play.google.com/store/apps/details?id=com.dzogchenltd.emailyourself) | 1 tap |
 | Repeating reminder | Repeating calendar event | None |
 
-## Desktop
+### Desktop
 
 1. Press `c` to compose an email
 1. Type the first letter of your email. Press `Enter` to select your email from the auto-complete drop-down. Press `tab`
@@ -49,7 +52,7 @@ feature. Click the arrow next to `Send button`.
 - 3 keystrokes from Step 2)
 - 2 keystrokes from Step 4) (`tab tab`)
 
-### Create an editable reminder
+#### Create an editable reminder
 
 Occasionally I'll want an editable reminder. For example, I may use a reminder
 to keep track of remaining work on a small project.
@@ -58,7 +61,7 @@ to keep track of remaining work on a small project.
 - Find the email in the Drafts folder and move to Inbox
 - Now you can edit reminder
 
-## Android
+### Android
 
 Inbox had a widget to create a Reminder. Similarly, I use a widget to send email, with my address preconfigured as the recipient.
 
@@ -79,7 +82,7 @@ Create a reminder:
 *Extra work compared to Inbox*
 Step 2), which is one tap. (Unfortunately [this step is required](https://jeffangelini.com/EmailYourself/faq/).)
 
-## Repeating reminders
+### Repeating reminders
 
 Inbox had repeating Reminders. With Gmail, emails can't snoozed repeatedly. So instead, I create repeating
 calendar events. I get an email notification for each event.
@@ -135,21 +138,23 @@ picture to [Inbox Reminder icon](https://miro.medium.com/max/64/1*iiTH-aEmmXAi9b
 
 This isn't related to reminders, but was another useful Inbox feature.
 
+Say I have a label called `My awesome label`. I only want emails with `My awesome label` to appear in my Inbox every morning.
+
+## Step 1: Automatically move `My awesome label` emails out of Inbox (but keep them unread)
+
+Go to the gmail filter that adds `My awesome label`. Check the `Skip the Inbox (Archive it)` checkbox.
+
+## Step 2: Move unread `My awesome label` emails to Inbox at 7am every day.
+
 Navigate to https://script.google.com/ and create a script with:
 
 ```
 function myFunction() {
-GmailApp.getUserLabelByName('My label 1').getThreads(0, 42).forEach(thread => {
-  if (thread.isUnread()) {
-    thread.moveToInbox();
-  }
-});
-
-GmailApp.getUserLabelByName('My label 2').getThreads(0, 42).forEach(thread => {
-  if (thread.isUnread()) {
-    thread.moveToInbox();
-  }
-});
+  GmailApp.getUserLabelByName('My awesome label').getThreads(0, 42).forEach(thread => {
+    if (thread.isUnread()) {
+      thread.moveToInbox();
+    }
+  });
 }
 ```
 Create the following trigger:
